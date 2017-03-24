@@ -17,9 +17,12 @@ NEI <- readRDS("summarySCC_PM25.rds")
 NEI <- data.table(NEI)
 str(NEI)
 
-# Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? 
+# Q1: Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? 
+# summarize emissions by year
 Emissions_by_Year <- NEI[,.(Emissions_Sum = sum(Emissions)), by = year]
+# create plot
 with(data = Emissions_by_Year, plot(year, Emissions_Sum/10^6, type = "b",
                                     xlab = "Year", ylab = "Emissions from PM2.5(10^6 tons)")) 
+# save image locally
 dev.copy(png, file = "plot1.png", width = 480, height = 480)
 dev.off()
